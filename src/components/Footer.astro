@@ -1,0 +1,19 @@
+---
+
+const today = new Date();
+
+import Socials from '../components/Socials.astro'
+
+
+---
+
+<footer>
+	<Socials></Socials>
+	<p>&copy; {today.getFullYear()} Pablo Fornali Manzanas.</p>
+</footer>
+<style>
+	footer {
+		padding: 25px;
+		text-align: center;
+	}
+</style>

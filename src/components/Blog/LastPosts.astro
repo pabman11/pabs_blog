@@ -1,0 +1,55 @@
+---
+import { Image, Picture } from '@astrojs/image/components';
+
+// Use Astro.glob() to fetch all posts, and then sort them by date.
+const posts = (await Astro.glob('../../pages/blog/*.{md,mdx}')).sort(
+(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
+).slice(0,4)
+
+
+---
+
+<section>
+    <h2>Últimos posts</h2>
+    <ul>
+        {posts.map((post) => (
+            <li>
+                <article>
+                    <header>
+                        <a href={post.url}>
+                            <Picture 
+                            formats={["webp","jpeg"]} 
+                            src={post.frontmatter.heroImage} 
+                            alt={post.frontmatter.title} 
+                            aspectRatio="16:9" 
+                            widths={[400, 800, 1200]}
+                            sizes="(max-width: 800px) 100vw, 800px" 
+                            ></Picture>
+                            <span>{post.frontmatter.title}</span>
+                        </a>
+                        <time datetime={post.frontmatter.pubDate}>
+                            {new Date(post.frontmatter.pubDate).toLocaleDateString('en-us', {
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric',
+                            })}
+                        </time>
+                    </header>
+                    <p>{post.frontmatter.description}</p>
+                </article>
+            </li>
+        ))}
+    </ul>
+</section>
+    
+    <style>
+        header a {
+            @apply block
+        }
+        ul{
+            @apply grid grid-cols-2 grid-rows-2 gap-2
+        }
+        time{
+            @apply block text-xs italic
+        }
+    </style>

@@ -1,0 +1,26 @@
+---
+import HeaderLink from './HeaderLink.astro';
+import { SITE_TITLE } from '../config';
+---
+
+<header>
+	<h2>
+		{SITE_TITLE}
+	</h2>
+	<sub>Pabman, Pabs, Pabsy... Como sea que que me conozcas, bienvenido a mi blog.</sub>
+	<nav>
+		<HeaderLink href="/">Home</HeaderLink>
+		<HeaderLink href="/blog">Blog</HeaderLink>
+		<HeaderLink href="/about">About</HeaderLink>
+		<HeaderLink href="https://twitter.com/Pabman_11" target="_blank">Twitter</HeaderLink>
+		<HeaderLink href="https://github.com/pabman11" target="_blank">GitHub</HeaderLink>
+	</nav>
+</header>
+<style>
+	header {
+		margin: 0em 0 2em;
+	}
+	h2 {
+		margin: 0.5em 0;
+	}
+</style>

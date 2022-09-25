@@ -1,0 +1,62 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+export interface Props {
+	content: {
+		title: string;
+		description: string;
+		pubDate?: string;
+		updatedDate?: string;
+		heroImage?: string;
+	};
+}
+
+const {
+	content: { title, description, pubDate, updatedDate, heroImage },
+} = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style is:global>
+			.blog-post .title {
+				@apply text-2xl 
+			}
+			.blog-post hr {
+				@apply border-t-2 border-gray-100 my-4 mx-0
+			}
+			.blog-post p{
+				@apply my-4 mx-0
+			}
+			.blog-post article a[target="_blank"]:after{
+				content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
+				margin: 0 3px 0 5px
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<article class="blog-post">
+				{heroImage && (
+					<img
+						width={720}
+						height={360}
+						src={heroImage}
+						alt=""
+					/>
+				)}
+				<h1 class="title">{title}</h1>
+				{pubDate && <time>{pubDate}</time>}
+				{updatedDate && <div>Actualizado el <time>{updatedDate}</time></div>}
+				<hr/>
+				<slot />
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>
