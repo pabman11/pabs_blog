@@ -1,5 +1,5 @@
 ---
-import { Image, Picture } from '@astrojs/image/components';
+import { Picture } from '@astrojs/image/components';
 
 // Use Astro.glob() to fetch all posts, and then sort them by date.
 const posts = (await Astro.glob('../../pages/blog/*.{md,mdx}')).sort(
@@ -25,7 +25,7 @@ const posts = (await Astro.glob('../../pages/blog/*.{md,mdx}')).sort(
                             widths={[400, 800, 1200]}
                             sizes="(max-width: 800px) 100vw, 800px" 
                             ></Picture>
-                            <span>{post.frontmatter.title}</span>
+                            <h3><span>{post.frontmatter.title}</span></h3>
                         </a>
                         <time datetime={post.frontmatter.pubDate}>
                             {new Date(post.frontmatter.pubDate).toLocaleDateString('en-us', {
@@ -45,6 +45,9 @@ const posts = (await Astro.glob('../../pages/blog/*.{md,mdx}')).sort(
 <style>
     header a {
         @apply block
+    }
+    header a h3{
+        @apply text-[#3273dc]
     }
     .grid {
         display: grid;

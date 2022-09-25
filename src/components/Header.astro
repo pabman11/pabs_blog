@@ -7,7 +7,7 @@ import { SITE_TITLE } from '../config';
 	<h2>
 		{SITE_TITLE}
 	</h2>
-	<sub>Pabman, Pabs, Pabsy... Como sea que que me conozcas, bienvenido a mi blog.</sub>
+	<h3>Pabman, Pabs, Pabsy... Como sea que que me conozcas, bienvenido a mi blog.</h3>
 	<nav>
 		<HeaderLink href="/">Inicio</HeaderLink>
 		<HeaderLink href="/blog">Blog</HeaderLink>
@@ -18,9 +18,9 @@ import { SITE_TITLE } from '../config';
 </header>
 <style>
 	header {
-		margin: 0em 0 2em;
+		@apply mb-4
 	}
-	h2 {
-		margin: 0.5em 0;
+	header h3{
+		@apply text-xs italic mb-4
 	}
 </style>
