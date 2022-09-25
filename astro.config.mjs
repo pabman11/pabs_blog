@@ -7,6 +7,9 @@ import image from "@astrojs/image";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://euphonious-dusk-88c5e3.netlify.app/',
+  markdown: {
+    drafts: true,
+  },
   integrations: [mdx(), sitemap(), tailwind(), image()]
 });
