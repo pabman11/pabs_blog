@@ -11,7 +11,7 @@ const posts = (await Astro.glob('../../pages/blog/*.{md,mdx}')).sort(
 
 <section>
     <h2>Últimos posts</h2>
-    <ul>
+    <ul class="grid">
         {posts.map((post) => (
             <li>
                 <article>
@@ -42,14 +42,36 @@ const posts = (await Astro.glob('../../pages/blog/*.{md,mdx}')).sort(
     </ul>
 </section>
     
-    <style>
-        header a {
-            @apply block
-        }
-        ul{
-            @apply grid grid-cols-2 grid-rows-2 gap-2
-        }
-        time{
-            @apply block text-xs italic
-        }
-    </style>
+<style>
+    header a {
+        @apply block
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-items: start;
+        grid-gap: 10px;
+    }
+
+    .grid div {
+    border: 1px solid #ccc;
+    width: 100%;
+    }
+
+    .grid > *:nth-child(2n-1) {
+    justify-self: center;
+    }
+
+    .grid > *:nth-child(2n) {
+    justify-self: end;
+    }
+
+    .grid > *:nth-child(2n-1):nth-of-type(1) {
+    border-color: red;
+    grid-column: span 2;
+    }
+
+    time{
+        @apply block text-xs italic
+    }
+</style>

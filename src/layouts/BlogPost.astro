@@ -23,7 +23,13 @@ const {
 		<BaseHead title={title} description={description} />
 		<style is:global>
 			.blog-post .title {
-				@apply text-2xl 
+				@apply text-2xl font-semibold
+			}
+			.blog-post h2 {
+				@apply text-center
+			}
+			.blog-post h2 span {
+				@apply text-center decoration-slate-400 decoration-slice decoration-wavy underline underline-offset-2 font-bold
 			}
 			.blog-post hr {
 				@apply border-t-2 border-gray-100 my-4 mx-0
