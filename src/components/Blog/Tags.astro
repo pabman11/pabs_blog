@@ -1,0 +1,26 @@
+---
+
+export interface Props {
+	tags?: Array<any>;
+}
+
+const { tags } = Astro.props
+
+---
+
+{ tags && (
+    <ul>
+        {tags.map((tag) => (
+            <li>{tag}</li>
+        ))}
+    </ul>
+)}
+
+<style>
+    ul{
+        @apply flex gap-4
+    }
+    ul li {
+        @apply bg-orange-300 rounded-2xl text-sm px-2 py-1
+    }
+</style>

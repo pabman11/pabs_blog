@@ -1,6 +1,7 @@
 ---
 import { Picture } from '@astrojs/image/components';
 
+import Tags from './Tags.astro';
 // Use Astro.glob() to fetch all posts, and then sort them by date.
 const posts = (await Astro.glob('../../pages/blog/*.{md,mdx}')).sort(
 (a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
@@ -35,6 +36,7 @@ const posts = (await Astro.glob('../../pages/blog/*.{md,mdx}')).sort(
                             })}
                         </time>
                     </header>
+                    <Tags tags={post.frontmatter.tags}></Tags>
                     <p>{post.frontmatter.description}</p>
                 </article>
             </li>
