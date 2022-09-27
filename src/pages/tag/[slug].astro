@@ -1,0 +1,94 @@
+---
+export async function getStaticPaths() {
+    const allPosts = (await Astro.glob('../blog/*.{md,mdx}')).sort(
+	    (a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
+    )
+    let posts = [];
+    const tags = allPosts.map(({ frontmatter }) => frontmatter).map(({tags}) => tags)
+    return tags.map((tag) => {
+        posts = [];
+        return tag.map((t: { toString: () => any }) => {
+            let tString = t.toString()
+            posts = allPosts.filter((post) => post.frontmatter.tags.includes(tString));
+            return { params: {slug: tString}, props: posts}
+        })
+    })
+}
+
+const { slug } = Astro.params;
+
+const { posts }  = Astro.props
+
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../config';
+import General from '../../layouts/General.astro';
+import { Image } from '@astrojs/image/components';
+import Tags from "@components/Blog/Tags.astro";
+
+---
+<General SITE_DESCRIPTION={SITE_DESCRIPTION} SITE_TITLE={SITE_TITLE}>
+	<style slot="style">
+		ul {
+			list-style-type: none;
+			padding: unset;
+		}
+		ul li {
+			display: flex;
+		}
+		ul li time {
+			flex: 0 0 130px;
+			font-style: italic;
+			color: #595959;
+		}
+		li > a{
+			@apply flex gap-4 text-neutral-800
+		}
+		li > a:visited{
+			@apply text-neutral-800
+		}
+		header{
+			width: 150px;
+		}
+		Image img, img{
+			@apply object-cover
+		}
+		img{
+			width: unset !important;
+			height: unset !important;
+			max-width: unset !important;
+			max-height: unset !important;
+		}
+	</style>
+	<section>
+		<ul>
+			{posts.map((post: { url: string | URL | null | undefined; frontmatter: { heroImage: any | string; title: string; pubDate: string; tags: any[] | undefined; description: unknown; }; }) => (
+				<li>
+					<a href={post.url}>
+						<header>
+								<Image 
+								formats={["webp","jpeg"]} 
+								src={post.frontmatter.heroImage} 
+								alt={post.frontmatter.title} 
+								aspectRatio="16:9" 
+								width="150px"
+								height={"75px"}
+								sizes="100vw" 
+								></Image>
+						</header>
+						<div>
+							<h3><span>{post.frontmatter.title}</span></h3>
+							<time datetime={post.frontmatter.pubDate}>
+								{new Date(post.frontmatter.pubDate).toLocaleDateString('es-ES', {
+									year: 'numeric',
+									month: 'short',
+									day: 'numeric',
+								})}
+							</time>
+							<Tags tags={post.frontmatter.tags}></Tags>
+							<p>{post.frontmatter.description}</p>
+						</div>
+					</a>
+				</li>
+			))}
+		</ul>
+	</section>
+</General>
