@@ -3,7 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
-import { Picture } from '@astrojs/image/components';
+import { Image } from '@astrojs/image/components';
 import Tags from "@components/Blog/Tags.astro";
 import "@fontsource/outfit";
 // Use Astro.glob() to fetch all posts, and then sort them by date.
@@ -35,6 +35,18 @@ let posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
 			li > a:visited{
 				@apply text-neutral-800
 			}
+			header{
+				width: 150px;
+			}
+			Image img, img{
+				@apply object-cover
+			}
+			img{
+				width: unset !important;
+				height: unset !important;
+				max-width: unset !important;
+				max-height: unset !important;
+			}
 		</style>
 	</head>
 	<body>
@@ -46,14 +58,15 @@ let posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
 						<li>
 							<a href={post.url}>
 								<header>
-										<Picture 
+										<Image 
 										formats={["webp","jpeg"]} 
 										src={post.frontmatter.heroImage} 
 										alt={post.frontmatter.title} 
 										aspectRatio="16:9" 
-										widths={[150]}
+										width="150px"
+										height={"75px"}
 										sizes="100vw" 
-										></Picture>
+										></Image>
 								</header>
 								<div>
 									<h3><span>{post.frontmatter.title}</span></h3>
