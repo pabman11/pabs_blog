@@ -15,16 +15,20 @@ export interface Props {
 		tags?: Array<any>;
 	};
 }
+const { SITE_DESCRIPTION, SITE_TITLE } = Astro.props
+
+import { SITE_TITLE as DEFAULT_SITE_TITLE, SITE_DESCRIPTION as DEFAULT_SITE_DESCRIPTION } from '../config';
 
 const {
 	content: { title, description, pubDate, updatedDate, heroImage, tags},
 } = Astro.props;
-
+const titleS = title ? DEFAULT_SITE_TITLE+ " - "+title : DEFAULT_SITE_TITLE
+const descriptionS = description ? description : DEFAULT_SITE_DESCRIPTION
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={titleS} description={descriptionS} />
 		<style is:global>
 			.blog-post .title {
 				@apply text-2xl font-semibold

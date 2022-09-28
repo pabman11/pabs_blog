@@ -1,20 +1,33 @@
 ---
+
+export interface Props {
+	SITE_DESCRIPTION?: string;
+	SITE_TITLE?: string;
+}
+
+
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
 const { SITE_DESCRIPTION, SITE_TITLE } = Astro.props
+
+import { SITE_TITLE as DEFAULT_SITE_TITLE, SITE_DESCRIPTION as DEFAULT_SITE_DESCRIPTION } from '../config';
+
+const title = SITE_TITLE ? DEFAULT_SITE_TITLE+ " - "+SITE_TITLE : DEFAULT_SITE_TITLE
+const description = SITE_DESCRIPTION ? SITE_DESCRIPTION : DEFAULT_SITE_DESCRIPTION
+
 import "@fontsource/outfit";
 ---
 
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<BaseHead title="Home" description={SITE_DESCRIPTION} />
+		<BaseHead title={title} description={description} />
         <slot name="style" />
 	</head>
 	<body>
-		<Header title={SITE_TITLE} />
+		<Header title={title} />
 		<main>
 			<slot />
 		</main>

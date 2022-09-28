@@ -1,7 +1,5 @@
 ---
 
-
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../config';
 export async function getStaticPaths() {
 
     const tagsConfig = await Astro.glob('../../config.ts')
@@ -26,7 +24,7 @@ import General from '../../layouts/General.astro';
 import LastPostsList from '@components/Blog/LastPostsList.astro'
 
 ---
-<General SITE_DESCRIPTION={SITE_DESCRIPTION} SITE_TITLE={SITE_TITLE}>
+<General SITE_TITLE={tag.title}>
 	<h2>{tag.title}</h2>
 	<LastPostsList posts={posts} />
 </General>

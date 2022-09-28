@@ -1,9 +1,8 @@
 ---
 import General from '../layouts/General.astro';
 
-import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
 import LastPostsGrid from '@components/Blog/LastPostsGrid.astro';
 ---
-<General SITE_DESCRIPTION={SITE_DESCRIPTION} SITE_TITLE={SITE_TITLE}>
+<General SITE_TITLE="Inicio">
 	<LastPostsGrid />
 </General>
