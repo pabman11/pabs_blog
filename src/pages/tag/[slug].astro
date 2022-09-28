@@ -10,7 +10,7 @@ export async function getStaticPaths() {
         return tag.map((t: { toString: () => any }) => {
             let tString = t.toString()
             posts = allPosts.filter((post) => post.frontmatter.tags.includes(tString));
-            return { params: {slug: tString}, props: posts}
+            return { params: {slug: tString}, props: {posts}}
         })
     })
 }
