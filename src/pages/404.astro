@@ -2,8 +2,14 @@
 
 import General from "src/layouts/General.astro";
 
+const post = (await Astro.glob('./blog/*.{md,mdx}')).sort(
+(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
+).filter((post) => !post.frontmatter.draft)[0]
+
 ---
 
 <General SITE_TITLE="">
-
+    <h1>Oh, esta página no existe...</h1>
+    <p>Es posible que un duende haya insertado sin querer esta url, pero si quieres volver al flujo normal de la vida, <a href="/">pulsa aquí</a>.</p>
+    <p>También puedes visitar el último artículo del blog: <a href={post.url} title={post.frontmatter.title}>{post.frontmatter.title}</a></p>
 </General>

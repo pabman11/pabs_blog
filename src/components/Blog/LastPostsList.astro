@@ -14,7 +14,7 @@ const { posts } = Astro.props
         padding: unset;
     }
     ul li {
-        display: flex;
+        @apply flex gap-4
     }
     ul li time {
         flex: 0 0 130px;
@@ -47,15 +47,15 @@ const { posts } = Astro.props
             <li>
                 <a href={post.url}>
                     <header>
-                            <Image 
-                            formats={["webp","jpeg"]} 
-                            src={post.frontmatter.heroImage} 
-                            alt={post.frontmatter.title} 
-                            aspectRatio="16:9" 
-                            width={150}
-                            height={75}
-                            sizes="100vw" 
-                            ></Image>
+                        <Image 
+                        formats={["webp","jpeg"]} 
+                        src={post.frontmatter.heroImage} 
+                        alt={post.frontmatter.title} 
+                        aspectRatio="16:9" 
+                        width={150}
+                        height={75}
+                        sizes="100vw" 
+                        ></Image>
                     </header>
                     <div>
                         <h3><span>{post.frontmatter.title}</span></h3>
