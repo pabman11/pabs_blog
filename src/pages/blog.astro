@@ -1,7 +1,6 @@
 ---
+import LastPostsList from '@components/Blog/LastPostsList.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
-import { Image } from '@astrojs/image/components';
-import Tags from "@components/Blog/Tags.astro";
 // Use Astro.glob() to fetch all posts, and then sort them by date.
 let posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
 	(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
@@ -12,69 +11,5 @@ import General from '../layouts/General.astro';
 
 ---
 <General SITE_DESCRIPTION={SITE_DESCRIPTION} SITE_TITLE={SITE_TITLE}>
-	<style slot="style">
-		ul {
-			list-style-type: none;
-			padding: unset;
-		}
-		ul li {
-			display: flex;
-		}
-		ul li time {
-			flex: 0 0 130px;
-			font-style: italic;
-			color: #595959;
-		}
-		li > a{
-			@apply flex gap-4 text-neutral-800
-		}
-		li > a:visited{
-			@apply text-neutral-800
-		}
-		header{
-			width: 150px;
-		}
-		Image img, img{
-			@apply object-cover
-		}
-		img{
-			width: unset !important;
-			height: unset !important;
-			max-width: unset !important;
-			max-height: unset !important;
-		}
-	</style>
-	<section>
-		<ul>
-			{posts.map((post) => (
-				<li>
-					<a href={post.url}>
-						<header>
-								<Image 
-								formats={["webp","jpeg"]} 
-								src={post.frontmatter.heroImage} 
-								alt={post.frontmatter.title} 
-								aspectRatio="16:9" 
-								width={150}
-								height={75}
-								sizes="100vw" 
-								></Image>
-						</header>
-						<div>
-							<h3><span>{post.frontmatter.title}</span></h3>
-							<time datetime={post.frontmatter.pubDate}>
-								{new Date(post.frontmatter.pubDate).toLocaleDateString('es-ES', {
-									year: 'numeric',
-									month: 'short',
-									day: 'numeric',
-								})}
-							</time>
-							<Tags tags={post.frontmatter.tags}></Tags>
-							<p>{post.frontmatter.description}</p>
-						</div>
-					</a>
-				</li>
-			))}
-		</ul>
-	</section>
+	<LastPostsList posts={posts} />
 </General>
