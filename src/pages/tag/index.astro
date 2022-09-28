@@ -1,0 +1,17 @@
+---
+
+
+import { SITE_TITLE, SITE_DESCRIPTION, POSIBLE_TAGS } from '../../config';
+
+
+import General from '../../layouts/General.astro';
+---
+<General SITE_DESCRIPTION={SITE_DESCRIPTION} SITE_TITLE={SITE_TITLE}>
+    { POSIBLE_TAGS && (
+        <ul>
+            {POSIBLE_TAGS.map((tag) => (
+                <li><a href={`/tag/${tag.tag}`}>{tag.title}</a></li>
+            ))}
+        </ul>
+    )}
+</General>

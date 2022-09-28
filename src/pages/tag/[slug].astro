@@ -1,29 +1,32 @@
 ---
+
+
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../config';
 export async function getStaticPaths() {
-    const allPosts = (await Astro.glob('../blog/*.{md,mdx}')).sort(
+
+    const tagsConfig = await Astro.glob('../../config.ts')
+	const tags = tagsConfig[0].POSIBLE_TAGS
+
+	const allPosts = (await Astro.glob('../blog/*.{md,mdx}')).sort(
 	    (a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
     )
     let posts = [];
-    const tags = allPosts.map(({ frontmatter }) => frontmatter).map(({tags}) => tags)
-    return tags.map((tag) => {
+    return tags.map((tag: { tag: any; }) => {
         posts = [];
-        return tag.map((t: { toString: () => any }) => {
-            let tString = t.toString()
-            posts = allPosts.filter((post) => post.frontmatter.tags.includes(tString));
-            return { params: {slug: tString}, props: {posts}}
-        })
+		posts = allPosts.filter((post) => post.frontmatter.tags.includes(tag.tag));
+		return { params: {slug: tag.tag}, props: {posts, tag}}
     })
 }
 
 const { slug } = Astro.params;
 
-const { posts }  = Astro.props
+const { posts, tag}  = Astro.props
 
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../config';
 import General from '../../layouts/General.astro';
 import LastPostsList from '@components/Blog/LastPostsList.astro'
 
 ---
 <General SITE_DESCRIPTION={SITE_DESCRIPTION} SITE_TITLE={SITE_TITLE}>
+	<h2>{tag.title}</h2>
 	<LastPostsList posts={posts} />
 </General>

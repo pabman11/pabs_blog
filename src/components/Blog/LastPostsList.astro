@@ -2,7 +2,7 @@
 import { Image } from '@astrojs/image/components';
 import Tags from '@components/Blog/Tags.astro'
 export interface Props {
-	posts?: Array<any>;
+	posts: Array<any>;
 }
 
 const { posts } = Astro.props
@@ -41,6 +41,7 @@ const { posts } = Astro.props
     }
 </style>
 <section>
+    {posts.length <= 0 ? <p>Oh, no hay posts</p> : 
     <ul>
         {posts.map((post: { url: string | URL | null | undefined; frontmatter: { heroImage: any | string; title: string; pubDate: string; tags: any[] | undefined; description: unknown; }; }) => (
             <li>
@@ -72,4 +73,5 @@ const { posts } = Astro.props
             </li>
         ))}
     </ul>
+}
 </section>
