@@ -25,6 +25,7 @@ import LastPostsList from '@components/Blog/LastPostsList.astro'
 
 ---
 <General SITE_TITLE={tag.title}>
+	<style slot="style"></style>
 	<h2>{tag.title}</h2>
 	<LastPostsList posts={posts} />
 </General>
