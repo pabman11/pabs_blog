@@ -7,7 +7,7 @@ import image from "@astrojs/image";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://euphonious-dusk-88c5e3.netlify.app/',
+  site: 'https://pabman11.github.io',
   markdown: {
     drafts: true,
   },
