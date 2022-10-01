@@ -1,6 +1,6 @@
 ---
 
-import General from "src/layouts/General.astro";
+import General from "@layouts/General.astro";
 
 const post = (await Astro.glob('./blog/*.{md,mdx}')).sort(
 (a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
