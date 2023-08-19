@@ -1,14 +1,17 @@
 ---
 import LastPostsList from '@components/Blog/LastPostsList.astro';
-// Use Astro.glob() to fetch all posts, and then sort them by date.
-let posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
-	(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
-).filter((post) => !post.frontmatter.draft);
 
 import General from '@layouts/General.astro';
+import { getCollection } from "astro:content";
 
+const pageTitle = "My Astro Learning Blog";
+const posts = await getCollection("blog");
+
+const latestPosts = posts.sort(
+	(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+).filter((post) => !post.data.draft);
 
 ---
 <General SITE_TITLE="Blog">
-	<LastPostsList posts={posts} />
+	<LastPostsList posts={latestPosts} />
 </General>

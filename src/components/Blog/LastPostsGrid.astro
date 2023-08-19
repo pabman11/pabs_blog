@@ -1,12 +1,12 @@
 ---
-import { Picture } from '@astrojs/image/components';
-
+import { Image } from 'astro:assets'
 import Tags from './Tags.astro';
-// Use Astro.glob() to fetch all posts, and then sort them by date.
-const posts = (await Astro.glob('../../pages/blog/*.{md,mdx}')).sort(
-(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
-).filter((post) => !post.frontmatter.draft).slice(0,4)
 
+
+import { getCollection } from 'astro:content';
+const posts = await getCollection("blog",({ data }) => {
+  return data.draft === false;
+})
 
 ---
 
@@ -17,27 +17,23 @@ const posts = (await Astro.glob('../../pages/blog/*.{md,mdx}')).sort(
             <li>
                 <article>
                     <header>
-                        <a href={post.url}>
-                            <Picture 
-                            formats={["webp","jpeg"]} 
-                            src={post.frontmatter.heroImage} 
-                            alt={post.frontmatter.title} 
-                            aspectRatio="16:9" 
-                            widths={[400, 800, 1200]}
-                            sizes="(max-width: 800px) 100vw, 800px" 
-                            ></Picture>
-                            <h3><span>{post.frontmatter.title}</span></h3>
+                        <a href={'/blog/'+post.slug}>
+                            <Image 
+                            src={post.data.cover} 
+                            alt={post.data.coverAlt} 
+                            ></Image>
+                            <h3><span>{post.data.title}</span></h3>
                         </a>
-                        <time datetime={post.frontmatter.pubDate}>
-                            {new Date(post.frontmatter.pubDate).toLocaleDateString('en-us', {
+                        <time datetime={post.data.pubDate}>
+                            {new Date(post.data.pubDate).toLocaleDateString('en-us', {
                                 year: 'numeric',
                                 month: 'short',
                                 day: 'numeric',
                             })}
                         </time>
                     </header>
-                    <Tags tags={post.frontmatter.tags}></Tags>
-                    <p>{post.frontmatter.description}</p>
+                    <Tags tags={post.data.tags}></Tags>
+                    <p>{post.data.description}</p>
                 </article>
             </li>
         ))}

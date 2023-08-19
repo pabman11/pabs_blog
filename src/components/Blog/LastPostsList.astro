@@ -1,5 +1,5 @@
 ---
-import { Image } from '@astrojs/image/components';
+import { Image } from 'astro:assets';
 import Tags from '@components/Blog/Tags.astro'
 export interface Props {
 	posts: Array<any>;
@@ -43,31 +43,26 @@ const { posts } = Astro.props
 <section>
     {posts.length <= 0 ? <p>Oh, no hay posts</p> : 
     <ul>
-        {posts.map((post: { url: string | URL | null | undefined; frontmatter: { heroImage: any | string; title: string; pubDate: string; tags: any[] | undefined; description: unknown; }; }) => (
+        {posts.map((post) => (
             <li>
                 <a href={post.url}>
                     <header>
                         <Image 
-                        formats={["webp","jpeg"]} 
-                        src={post.frontmatter.heroImage} 
-                        alt={post.frontmatter.title} 
-                        aspectRatio="16:9" 
-                        width={150}
-                        height={75}
-                        sizes="100vw" 
-                        ></Image>
+                            src={post.data.cover} 
+                            alt={post.data.coverAlt} 
+                            ></Image>
                     </header>
                     <div>
-                        <h3><span>{post.frontmatter.title}</span></h3>
-                        <time datetime={post.frontmatter.pubDate}>
-                            {new Date(post.frontmatter.pubDate).toLocaleDateString('es-ES', {
+                        <h3><span>{post.data.title}</span></h3>
+                        <time datetime={post.data.pubDate}>
+                            {new Date(post.data.pubDate).toLocaleDateString('es-ES', {
                                 year: 'numeric',
                                 month: 'short',
                                 day: 'numeric',
                             })}
                         </time>
-                        <Tags tags={post.frontmatter.tags}></Tags>
-                        <p>{post.frontmatter.description}</p>
+                        <Tags tags={post.data.tags}></Tags>
+                        <p>{post.data.description}</p>
                     </div>
                 </a>
             </li>

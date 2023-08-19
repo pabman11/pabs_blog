@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets'
+
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -6,21 +8,22 @@ import Footer from "../components/Footer.astro";
 import "@fontsource/outfit";
 import Tags from "@components/Blog/Tags.astro";
 export interface Props {
-	content: {
+	frontmatter: {
 		title: string;
 		description: string;
 		pubDate?: string;
 		updatedDate?: string;
-		heroImage?: string;
+		cover?: string;
+		coverAlt?: string;
 		tags?: Array<any>;
 	};
 }
-const { SITE_DESCRIPTION, SITE_TITLE } = Astro.props
+
 
 import { SITE_TITLE as DEFAULT_SITE_TITLE, SITE_DESCRIPTION as DEFAULT_SITE_DESCRIPTION } from '../config';
 
 const {
-	content: { title, description, pubDate, updatedDate, heroImage, tags},
+	frontmatter: { title, description, pubDate, updatedDate, cover,coverAlt, tags},
 } = Astro.props;
 const titleS = title ? DEFAULT_SITE_TITLE+ " - "+title : DEFAULT_SITE_TITLE
 const descriptionS = description ? description : DEFAULT_SITE_DESCRIPTION
@@ -54,15 +57,13 @@ const descriptionS = description ? description : DEFAULT_SITE_DESCRIPTION
 
 	<body>
 		<Header />
-		<main>
+		<main transition:animate="slide">
 			<article class="blog-post">
-				{heroImage && (
-					<img
-						width={720}
-						height={360}
-						src={heroImage}
-						alt=""
-					/>
+				{cover && (
+                            <Image 
+                            src={cover} 
+                            alt={coverAlt} 
+                            ></Image>
 				)}
 				<h1 class="title">{title}</h1>
 				{pubDate && <time>{pubDate}</time>}

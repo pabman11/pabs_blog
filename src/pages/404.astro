@@ -1,15 +1,22 @@
 ---
 
 import General from "@layouts/General.astro";
+import {  getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 
-const post = (await Astro.glob('./blog/*.{md,mdx}')).sort(
-(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
-).filter((post) => !post.frontmatter.draft)[0]
+
+const posts = await getCollection("blog")
+let post;
+posts.forEach((el:CollectionEntry<'blog'>, i:Number) => {
+    if(i == 0){
+        post = el
+    }
+});
 
 ---
 
-<General SITE_TITLE="">
+<General SITE_TITLE="404">
     <h1>Oh, esta página no existe...</h1>
     <p>Es posible que un duende haya insertado sin querer esta url, pero si quieres volver al flujo normal de la vida, <a href="/">pulsa aquí</a>.</p>
-    <p>También puedes visitar el último artículo del blog: <a href={post.url} title={post.frontmatter.title}>{post.frontmatter.title}</a></p>
+    <p>También puedes visitar el último artículo del blog: <a href={'/blog/'+post.slug} title={post.data.title}>{post.data.title}</a></p>
 </General>
