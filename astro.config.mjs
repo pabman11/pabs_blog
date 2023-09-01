@@ -10,8 +10,4 @@ export default defineConfig({
     drafts: true,
   },
   integrations: [mdx(), sitemap(), tailwind(), ],
-  experimental: {
-    assets: true,
-    viewTransitions: true
-  }
 });

@@ -1,11 +1,10 @@
 ---
 import { Image } from 'astro:assets'
-import Tags from './Tags.astro';
+import Tags from './Tags.astro'
 
-
-import { getCollection } from 'astro:content';
-const posts = await getCollection("blog",({ data }) => {
-  return data.draft === false;
+import { getCollection } from 'astro:content'
+const posts = await getCollection('blog', ({ data }) => {
+  return data.draft === false
 })
 
 ---
@@ -17,18 +16,19 @@ const posts = await getCollection("blog",({ data }) => {
             <li>
                 <article>
                     <header>
-                        <a href={'/blog/'+post.slug}>
-                            <Image 
-                            src={post.data.cover} 
-                            alt={post.data.coverAlt} 
+                        <a href={'/blog/' + post.slug}>
+                            <Image
+                            src={post.data.cover}
+                            alt={post.data.coverAlt}
+                            class="aspect-video object-cover"
                             ></Image>
                             <h3><span>{post.data.title}</span></h3>
                         </a>
                         <time datetime={post.data.pubDate}>
                             {new Date(post.data.pubDate).toLocaleDateString('en-us', {
-                                year: 'numeric',
-                                month: 'short',
-                                day: 'numeric',
+                              year: 'numeric',
+                              month: 'short',
+                              day: 'numeric'
                             })}
                         </time>
                     </header>
@@ -39,7 +39,7 @@ const posts = await getCollection("blog",({ data }) => {
         ))}
     </ul>
 </section>
-    
+
 <style>
     header a {
         @apply block

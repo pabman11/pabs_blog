@@ -1,28 +1,30 @@
 ---
 import { getCollection } from "astro:content";
+import General from "../../layouts/General.astro";
+import LastPostsList from "../../components/Blog/LastPostsList.astro";
 export async function getStaticPaths() {
-  const allPosts = await getCollection("blog");
-  const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+    const allPosts = await getCollection("blog");
+    const uniqueTags = [
+        ...new Set(allPosts.map((post) => post.data.tags).flat()),
+    ];
 
-  return uniqueTags.map((tag) => {
-    const filteredPosts = allPosts.filter((post) =>
-      post.data.tags.includes(tag)
-    );
-    return {
-      params: { tag },
-      props: { posts: filteredPosts },
-    };
-  });
+    return uniqueTags.map((tag) => {
+        const filteredPosts = allPosts.filter((post) =>
+            post.data.tags.includes(tag),
+        );
+        return {
+            params: { tag },
+            props: { posts: filteredPosts },
+        };
+    });
 }
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
-import General from '../../layouts/General.astro';
-import LastPostsList from '../../components/Blog/LastPostsList.astro'
-
 ---
-<General SITE_TITLE={tag.title}>
-	<style slot="style"></style>
-	<h2>{tag.title}</h2>
-	<LastPostsList posts={posts} />
+
+<General SITE_TITLE={tag}>
+    <style slot="style"></style>
+    <h2>{tag}</h2>
+    <LastPostsList posts={posts} />
 </General>

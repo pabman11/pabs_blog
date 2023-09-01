@@ -1,72 +1,54 @@
 ---
-import { Image } from 'astro:assets';
-import Tags from '@components/Blog/Tags.astro'
+import { Image } from "astro:assets";
+import Tags from "@components/Blog/Tags.astro";
 export interface Props {
-	posts: Array<any>;
+    posts: Array<any>;
 }
 
-const { posts } = Astro.props
+const { posts } = Astro.props;
+console.log(posts.length);
 ---
 
-<style slot="style">
-    ul {
-        list-style-type: none;
-        padding: unset;
-    }
-    ul li {
-        @apply flex gap-4
-    }
-    ul li time {
-        flex: 0 0 130px;
-        font-style: italic;
-        color: #595959;
-    }
-    li > a{
-        @apply flex gap-4 text-neutral-800
-    }
-    li > a:visited{
-        @apply text-neutral-800
-    }
-    header{
-        width: 150px;
-    }
-    Image img, img{
-        @apply object-cover
-    }
-    img{
-        width: unset !important;
-        height: unset !important;
-        max-width: unset !important;
-        max-height: unset !important;
-    }
-</style>
 <section>
-    {posts.length <= 0 ? <p>Oh, no hay posts</p> : 
-    <ul>
-        {posts.map((post) => (
-            <li>
-                <a href={post.url}>
-                    <header>
-                        <Image 
-                            src={post.data.cover} 
-                            alt={post.data.coverAlt} 
-                            ></Image>
-                    </header>
-                    <div>
-                        <h3><span>{post.data.title}</span></h3>
-                        <time datetime={post.data.pubDate}>
-                            {new Date(post.data.pubDate).toLocaleDateString('es-ES', {
-                                year: 'numeric',
-                                month: 'short',
-                                day: 'numeric',
-                            })}
-                        </time>
-                        <Tags tags={post.data.tags}></Tags>
-                        <p>{post.data.description}</p>
-                    </div>
-                </a>
-            </li>
-        ))}
-    </ul>
-}
+    {
+        posts.length == 0 ? (
+            <p>Oh, no hay posts</p>
+        ) : (
+            <ul>
+                {posts.map((post) => (
+                    <li class="grid grid-cols-12 gap-4">
+                        <header class="col-span-12 md:col-span-3">
+                            <a href={'/blog/' + post.slug}>
+                                <Image
+                                    src={post.data.cover}
+                                    alt={post.data.coverAlt}
+                                    class="aspect-video object-cover"
+                                />
+                            </a>
+                        </header>
+                        <div class="col-span-12 md:col-span-9">
+                            <h3>
+                                {" "}
+                                <a href={'/blog/' + post.slug}>
+                                    <span>{post.data.title}</span>
+                                </a>
+                            </h3>
+                            <time datetime={post.data.pubDate}>
+                                {new Date(post.data.pubDate).toLocaleDateString(
+                                    "es-ES",
+                                    {
+                                        year: "numeric",
+                                        month: "short",
+                                        day: "numeric",
+                                    },
+                                )}
+                            </time>
+                            <Tags tags={post.data.tags} />
+                            <p>{post.data.description}</p>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+        )
+    }
 </section>
