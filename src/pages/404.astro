@@ -17,6 +17,6 @@ posts.forEach((el:CollectionEntry<'blog'>, i:Number) => {
 
 <General SITE_TITLE="404">
     <h1>Oh, esta página no existe...</h1>
-    <p>Es posible que un duende haya insertado sin querer esta url, pero si quieres volver al flujo normal de la vida, <a href="/">pulsa aquí</a>.</p>
-    <p>También puedes visitar el último artículo del blog: <a href={'/blog/'+post.slug} title={post.data.title}>{post.data.title}</a></p>
+    <p>Es posible que un duende haya insertado sin querer esta url, pero si quieres volver al flujo normal de la vida, <a href="/pabs_blog/">pulsa aquí</a>.</p>
+    <p>También puedes visitar el último artículo del blog: <a href={'/pabs_blog/blog/'+post.slug} title={post.data.title}>{post.data.title}</a></p>
 </General>
