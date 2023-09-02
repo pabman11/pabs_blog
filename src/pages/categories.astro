@@ -1,25 +1,29 @@
 ---
 import { getCollection } from "astro:content";
-import type { CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from "astro:content";
 import General from "../layouts/General.astro";
 const allPosts = await getCollection("blog");
-const tags = [...new Set(
-    allPosts.map(
-    (post:CollectionEntry<'blog'>) => post.data.tags
-    ).flat())
+const tags = [
+    ...new Set(
+        allPosts.map((post: CollectionEntry<"blog">) => post.data.tags).flat(),
+    ),
 ];
-
 ---
 
-<General  SITE_TITLE="Categorías del blog">
+<General SITE_TITLE="Categorías del blog">
     <style slot="style">
         ul {
-            @apply md:grid md:grid-cols-2
+            @apply md:grid md:grid-cols-2;
         }
     </style>
     <ul></ul>
-    {tags.map(function(tag){
-        return (<li class="mb-4"><a href={'/pabs_blog/tag/'+tag}>{tag}</a></li>)
-    })}
-</ul>
+    {
+        tags.map(function (tag) {
+            return (
+                <li class="mb-4">
+                    <a href={"/pabs_blog/tag/" + tag}>{tag}</a>
+                </li>
+            );
+        })
+    }
 </General>
