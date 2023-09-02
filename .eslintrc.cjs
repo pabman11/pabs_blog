@@ -13,7 +13,7 @@ module.exports = {
         node: true
       },
       // Define the configuration for `.astro` file.
-      files: ["*.astro", '.eslintrc.{js,cjs}'],
+      files: ["*.astro", '.eslintrc.{js,cjs}', '*.mjs'],
       // Allows Astro components to be parsed.
       parser: "astro-eslint-parser",
       // Parse the script in `.astro` as TypeScript by adding the following configuration.
@@ -25,6 +25,9 @@ module.exports = {
       rules: {
         // override/add rules settings here, such as:
         // "astro/no-set-html-directive": "error"
+
+        "indent": ["error", 4]
+
       },
     }
   ],
