@@ -10,44 +10,45 @@ import DarkMode from "./DarkMode.astro";
         class="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
     >
         <div
-            class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+            class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 group"
         >
-            <a href="/pabs_blog" class="flex items-center">
-                <h2>
-                    {SITE_TITLE}
-                </h2>
-            </a>
-            <h3 class="text-xs italic mb-4">
-                Pabs, Pabman, Pabsy... Como sea que que me conozcas, bienvenido
-                a mi blog.
-            </h3>
-            <button
-                data-collapse-toggle="navbar-hamburger"
-                type="button"
-                class="peer inline-flex md:hidden items-center justify-center p-2 w-10 h-10 ml-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                aria-controls="navbar-hamburger"
-                aria-expanded="false"
-            >
-                <span class="sr-only">Open main menu</span>
-                <svg
-                    class="w-5 h-5"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 17 14"
+            <div class="flex w-full">
+                <div class="flex-1 w-full">
+                    <a href="/pabs_blog" class="flex items-center">
+                        <h2>
+                            {SITE_TITLE}
+                        </h2>
+                    </a>
+                    <h3 class="text-xs italic mb-4">
+                        Pabs, Pabman, Pabsy... Como sea que que me conozcas,
+                        bienvenido a mi blog.
+                    </h3>
+                </div>
+                <button
+                    data-collapse-toggle="navbar-hamburger"
+                    type="button"
+                    class="inline-flex md:hidden items-center justify-center p-2 w-10 h-10 ml-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    aria-controls="navbar-hamburger"
+                    aria-expanded="false"
                 >
-                    <path
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M1 1h15M1 7h15M1 13h15"></path>
-                </svg>
-            </button>
-            <nav
-                class="hidden md:block w-full peer-aria-expanded:block"
-                id="navbar-hamburger"
-            >
+                    <span class="sr-only">Open main menu</span>
+                    <svg
+                        class="w-5 h-5"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 17 14"
+                    >
+                        <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav class="hidden md:block w-full" id="navbar-hamburger">
                 <ul
                     class="flex flex-col md:flex-row font-medium mt-4 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
                 >
@@ -99,11 +100,9 @@ toggle.addEventListener("click", (e) => {
 
 function toggleNav(e) {
     if (e === toggle) {
-        let current = e.getAttribute("aria-expanded");
-        e.setAttribute(
-            "aria-expanded",
-            current == "true" ? "false" : "true",
-        );
+        document
+            .getElementById("navbar-hamburger")
+            .classList.toggle("!block");
     } else {
         toggleNav(e.parentNode);
     }
