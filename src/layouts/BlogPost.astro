@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets'
+import { Image } from "astro:assets";
 
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
@@ -8,71 +8,90 @@ import Footer from "../components/Footer.astro";
 import "@fontsource/outfit";
 import Tags from "@components/Blog/Tags.astro";
 export interface Props {
-	frontmatter: {
-		title: string;
-		description: string;
-		pubDate?: string;
-		updatedDate?: string;
-		cover?: string;
-		coverAlt?: string;
-		tags?: Array<any>;
-	};
+    frontmatter: {
+        title: string;
+        description: string;
+        pubDate?: string;
+        updatedDate?: string;
+        cover?: string;
+        coverAlt?: string;
+        tags?: Array<any>;
+    };
 }
 
-
-import { SITE_TITLE as DEFAULT_SITE_TITLE, SITE_DESCRIPTION as DEFAULT_SITE_DESCRIPTION } from '../config';
+import {
+    SITE_TITLE as DEFAULT_SITE_TITLE,
+    SITE_DESCRIPTION as DEFAULT_SITE_DESCRIPTION,
+} from "../config";
 
 const {
-	frontmatter: { title, description, pubDate, updatedDate, cover,coverAlt, tags},
+    frontmatter: {
+        title,
+        description,
+        pubDate,
+        updatedDate,
+        cover,
+        coverAlt,
+        tags,
+    },
 } = Astro.props;
-const titleS = title ? DEFAULT_SITE_TITLE+ " - "+title : DEFAULT_SITE_TITLE
-const descriptionS = description ? description : DEFAULT_SITE_DESCRIPTION
+const titleS = title ? DEFAULT_SITE_TITLE + " - " + title : DEFAULT_SITE_TITLE;
+const descriptionS = description ? description : DEFAULT_SITE_DESCRIPTION;
 ---
 
 <html lang="en">
-	<head>
-		<BaseHead title={titleS} description={descriptionS} />
-		<style is:global>
-			.blog-post .title {
-				@apply text-2xl font-semibold
-			}
-			.blog-post h2 {
-				@apply text-center
-			}
-			.blog-post h2 span {
-				@apply text-center decoration-slate-400 decoration-slice decoration-wavy underline underline-offset-2 font-bold
-			}
-			.blog-post hr {
-				@apply border-t-2 border-gray-100 my-4 mx-0
-			}
-			.blog-post p{
-				@apply my-4 mx-0
-			}
-			.blog-post article a[target="_blank"]:after{
-				content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
-				margin: 0 3px 0 5px
-			}
-		</style>
-	</head>
+    <head>
+        <BaseHead title={titleS} description={descriptionS} />
+        <style is:global>
+            .blog-post .title {
+                @apply text-2xl font-semibold;
+            }
+            .blog-post h2 {
+                @apply text-center;
+            }
+            .blog-post h2 span {
+                @apply text-center decoration-slate-400 decoration-slice decoration-wavy underline underline-offset-2 font-bold;
+            }
+            .blog-post hr {
+                @apply border-t-2 border-gray-100 my-4 mx-0;
+            }
+            .blog-post p {
+                @apply my-4 mx-0;
+            }
+            .blog-post article a[target="_blank"]:after {
+                content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
+                margin: 0 3px 0 5px;
+            }
+        </style>
+    </head>
 
-	<body>
-		<Header />
-		<main transition:animate="slide">
-			<article class="blog-post">
-				{cover && (
-                            <Image 
-                            src={cover} 
-                            alt={coverAlt} 
-                            ></Image>
-				)}
-				<h1 class="title">{title}</h1>
-				{pubDate && <time>{pubDate}</time>}
-				{updatedDate && <div>Actualizado el <time>{updatedDate}</time></div>}
-				<Tags tags={tags}></Tags>
-				<hr/>
-				<slot />
-			</article>
-		</main>
-		<Footer />
-	</body>
+    <body>
+        <Header />
+        <main transition:animate="slide">
+            <article class="blog-post">
+                {
+                    cover && (
+                        <Image
+                            src={cover}
+                            alt={coverAlt}
+                            transition:name="cover"
+                        />
+                    )
+                }
+                <h1 class="title">{title}</h1>
+                {pubDate && <time>{pubDate}</time>}
+                {
+                    updatedDate && (
+                        <div>
+                            Actualizado el <time>{updatedDate}</time>
+                        </div>
+                    )
+                }
+                <Tags tags={tags} />
+                <hr />
+                <slot />
+            </article>
+        </main>
+        <Footer />
+    </body>
 </html>
