@@ -38,8 +38,6 @@ import "@fontsource/outfit";
 
             body {
                 margin: auto;
-                padding: 20px;
-                max-width: 65ch;
                 text-align: left;
                 background-color: #fff;
                 word-wrap: break-word;
@@ -95,7 +93,7 @@ import "@fontsource/outfit";
     </head>
     <body>
         <Header title={title} />
-        <main transition:animate="slide">
+        <main transition:animate="slide" class="max-w-[65ch] mx-auto">
             <slot />
         </main>
         <Footer />
