@@ -9,6 +9,7 @@ import "@fontsource/outfit";
 import Tags from "@components/Blog/Tags.astro";
 export interface Props {
     frontmatter: {
+        slug: string;
         title: string;
         description: string;
         pubDate?: string;
@@ -26,6 +27,7 @@ import {
 
 const {
     frontmatter: {
+        slug,
         title,
         description,
         pubDate,
@@ -74,7 +76,7 @@ const descriptionS = description ? description : DEFAULT_SITE_DESCRIPTION;
                         <Image
                             src={cover}
                             alt={coverAlt}
-                            transition:name="cover"
+                            transition:name={"cover-" + slug}
                         />
                     )
                 }

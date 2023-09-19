@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import General from "../layouts/General.astro";
@@ -8,22 +9,45 @@ const tags = [
         allPosts.map((post: CollectionEntry<"blog">) => post.data.tags).flat(),
     ),
 ];
+const imgofTag = [
+    ...new Set(
+        /* tags.map((tag) => allPosts.filter((post: CollectionEntry<"blog">)=> {post.data.tags.includes(tag)})[0]), */
+        tags.map((tag) => {
+            const filteredPosts = allPosts.filter((post) =>
+                post.data.tags.includes(tag),
+            );
+            return { tag: tag, cover: filteredPosts[0].data.cover };
+        }),
+    ),
+];
 ---
 
 <General SITE_TITLE="Categorías del blog">
     <style slot="style">
         ul {
-            @apply md:grid md:grid-cols-2;
+            @apply md:grid md:grid-cols-2  gap-x-4;
         }
     </style>
-    <ul></ul>
-    {
-        tags.map(function (tag) {
-            return (
-                <li class="mb-4">
-                    <a href={"/pabs_blog/tag/" + tag}>{tag}</a>
-                </li>
-            );
-        })
-    }
+    <ul>
+        {
+            tags.map(function (tag) {
+                return (
+                    <li class="mb-4">
+                        <a href={"/pabs_blog/tag/" + tag}>
+                            <Image
+                                src={
+                                    imgofTag.filter((img) => {
+                                        if (img.tag === tag) return img;
+                                    })[0].cover
+                                }
+                                alt={tag}
+                                class="aspect-video object-cover"
+                            />
+                            {tag}
+                        </a>
+                    </li>
+                );
+            })
+        }
+    </ul>
 </General>
