@@ -6,6 +6,7 @@ import { remarkReadingTime } from './src/scripts/remark-reading-time.mjs';
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://blog.pabsy.dev",
   integrations: [
     mdx(), sitemap(), tailwind()
   ],
