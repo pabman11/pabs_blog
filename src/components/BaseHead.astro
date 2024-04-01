@@ -33,6 +33,8 @@ const { title, description, image = "/placeholder-social.jpg" } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+
 <ViewTransitions />
 <style>
     /*
@@ -91,3 +93,5 @@ const { title, description, image = "/placeholder-social.jpg" } = Astro.props;
         font-style: italic;
     }
 </style>
+<meta name="robots" content="noindex,nofollow" />
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c85495cb3b1e485291b1bd173c526e9c"}'></script><!-- End Cloudflare Web Analytics -->
