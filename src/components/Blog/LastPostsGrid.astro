@@ -16,7 +16,7 @@ const posts = await getCollection("blog", ({ data }) => {
                 <li>
                     <article>
                         <header>
-                            <a href={"/pabs_blog/blog/" + post.slug}>
+                            <a href={"/blog/" + post.slug}>
                                 <Image
                                     src={post.data.cover}
                                     alt={post.data.coverAlt}
