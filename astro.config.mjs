@@ -6,13 +6,11 @@ import { remarkReadingTime } from './src/scripts/remark-reading-time.mjs';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://pabman11.github.io',
-  base: '/pabs_blog',
-  markdown: {
-    drafts: true
-  },
-  integrations: [mdx(), sitemap(), tailwind()],
+  integrations: [
+    mdx(), sitemap(), tailwind()
+  ],
   markdown: {
     remarkPlugins: [remarkReadingTime],
+    drafts: true
   },
 })
