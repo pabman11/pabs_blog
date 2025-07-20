@@ -1,11 +1,15 @@
 ---
-import { Image } from "astro:assets";
-import Tags from "./Tags.astro";
+import { Image } from 'astro:assets'
+import Tags from './Tags.astro'
 
-import { getCollection } from "astro:content";
-const posts = await getCollection("blog", ({ data }) => {
-    return data.draft === false;
-});
+import { getCollection } from 'astro:content'
+const posts = await getCollection('blog', ({ data }) => {
+    return data.draft === false
+})
+
+posts.sort(
+    (a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+);
 ---
 
 <section>
@@ -16,11 +20,11 @@ const posts = await getCollection("blog", ({ data }) => {
                 <li>
                     <article>
                         <header>
-                            <a href={"/blog/" + post.slug}>
+                            <a href={'/blog/' + post.slug}>
                                 <Image
                                     src={post.data.cover}
                                     alt={post.data.coverAlt}
-                                    transition:name={'cover-'+post.slug}
+                                    transition:name={'cover-' + post.slug}
                                     class="aspect-video object-cover"
                                 />
                                 <h3>
@@ -29,12 +33,12 @@ const posts = await getCollection("blog", ({ data }) => {
                             </a>
                             <time datetime={post.data.pubDate}>
                                 {new Date(post.data.pubDate).toLocaleDateString(
-                                    "en-us",
+                                    'en-us',
                                     {
-                                        year: "numeric",
-                                        month: "short",
-                                        day: "numeric",
-                                    },
+                                        year: 'numeric',
+                                        month: 'short',
+                                        day: 'numeric'
+                                    }
                                 )}
                             </time>
                         </header>

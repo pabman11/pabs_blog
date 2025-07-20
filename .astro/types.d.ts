@@ -200,6 +200,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
+"la-hoja-en-blanco.mdx": {
+	id: "la-hoja-en-blanco.mdx";
+  slug: "la-hoja-en-blanco";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 };
 
 	};
