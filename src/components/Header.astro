@@ -1,7 +1,7 @@
 ---
-import HeaderLink from "./HeaderLink.astro";
-import { SITE_TITLE } from "../config";
-import DarkMode from "./DarkMode.astro";
+import HeaderLink from './HeaderLink.astro'
+import { SITE_TITLE } from '../config'
+import DarkMode from './DarkMode.astro';
 ---
 
 <DarkMode />
@@ -91,20 +91,20 @@ import DarkMode from "./DarkMode.astro";
 </header>
 <script is:inline>
 const toggle = document.querySelector(
-    "button[data-collapse-toggle=navbar-hamburger]",
-);
+  'button[data-collapse-toggle=navbar-hamburger]'
+)
 
-toggle.addEventListener("click", (e) => {
-    toggleNav(e.target);
-});
+toggle.addEventListener('click', (e) => {
+  toggleNav(e.target)
+})
 
-function toggleNav(e) {
-    if (e === toggle) {
-        document
-            .getElementById("navbar-hamburger")
-            .classList.toggle("!block");
-    } else {
-        toggleNav(e.parentNode);
-    }
+function toggleNav (e) {
+  if (e === toggle) {
+    document
+      .getElementById('navbar-hamburger')
+      .classList.toggle('block!')
+  } else {
+    toggleNav(e.parentNode)
+  }
 }
 </script>

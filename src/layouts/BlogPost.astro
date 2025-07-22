@@ -45,6 +45,7 @@ const descriptionS = description ? description : DEFAULT_SITE_DESCRIPTION;
     <head>
         <BaseHead title={titleS} description={descriptionS} />
         <style is:global>
+            @reference '@assets/styles.css';
             .blog-post .title {
                 @apply text-2xl font-semibold;
             }
@@ -52,7 +53,7 @@ const descriptionS = description ? description : DEFAULT_SITE_DESCRIPTION;
                 @apply text-center;
             }
             .blog-post h2 span {
-                @apply text-center decoration-slate-400 decoration-slice decoration-wavy underline underline-offset-2 font-bold;
+                @apply text-center decoration-slate-400 box-decoration-slice decoration-wavy underline underline-offset-2 font-bold;
             }
             .blog-post hr {
                 @apply border-t-2 border-gray-100 my-4 mx-0;

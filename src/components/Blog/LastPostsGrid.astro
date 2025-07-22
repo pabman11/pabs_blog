@@ -8,38 +8,39 @@ const posts = await getCollection('blog', ({ data }) => {
 })
 
 posts.sort(
-    (a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+    (a, b) =>
+        new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
 );
 ---
 
 <section>
-    <h2>Últimos posts</h2>
-    <ul class="grid">
+    <h2 class="font-bold text-3xl text-center">Últimos posts</h2>
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
         {
             posts.map((post) => (
-                <li>
+                <li class="first-of-type:col-span-2">
                     <article>
                         <header>
-                            <a href={'/blog/' + post.slug}>
+                            <a class="block" href={'/blog/' + post.slug}>
                                 <Image
                                     src={post.data.cover}
                                     alt={post.data.coverAlt}
                                     transition:name={'cover-' + post.slug}
                                     class="aspect-video object-cover"
                                 />
-                                <h3>
+                                <h3 class="text-lg font-semibold text-[#3273dc]">
                                     <span>{post.data.title}</span>
                                 </h3>
                             </a>
-                            <time datetime={post.data.pubDate}>
-                                {new Date(post.data.pubDate).toLocaleDateString(
-                                    'en-us',
-                                    {
-                                        year: 'numeric',
-                                        month: 'short',
-                                        day: 'numeric'
-                                    }
-                                )}
+                            <time
+                                class="block text-xs italic"
+                                datetime={post.data.pubDate}
+                            >
+                                {Intl.DateTimeFormat('es-ES', {
+                                    year: 'numeric',
+                                    month: 'short',
+                                    day: 'numeric'
+                                }).format(new Date(post.data.pubDate))}
                             </time>
                         </header>
                         <Tags tags={post.data.tags} />
@@ -50,39 +51,3 @@ posts.sort(
         }
     </ul>
 </section>
-
-<style>
-    header a {
-        @apply block;
-    }
-    header a h3 {
-        @apply text-[#3273dc];
-    }
-    .grid {
-        display: grid;
-        grid-template-columns: auto auto;
-        justify-items: start;
-        grid-gap: 10px;
-    }
-
-    .grid div {
-        border: 1px solid #ccc;
-        width: 100%;
-    }
-
-    .grid > *:nth-child(2n-1) {
-        justify-self: center;
-    }
-
-    .grid > *:nth-child(2n) {
-        justify-self: end;
-    }
-
-    .grid > *:nth-child(2n-1):nth-of-type(1) {
-        grid-column: span 2;
-    }
-
-    time {
-        @apply block text-xs italic;
-    }
-</style>

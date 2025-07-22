@@ -4,14 +4,13 @@ import LastPostsList from '@components/Blog/LastPostsList.astro'
 import General from '@layouts/General.astro'
 import { getCollection } from 'astro:content'
 
-const pageTitle = 'My Astro Learning Blog'
 const posts = await getCollection('blog')
 
 const latestPosts = posts.sort(
-  (a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+    (a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
 ).filter((post) => !post.data.draft);
 
 ---
 <General SITE_TITLE="Blog">
-	<LastPostsList posts={latestPosts} />
+    <LastPostsList posts={latestPosts} />
 </General>

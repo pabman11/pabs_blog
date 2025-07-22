@@ -1,0 +1,48 @@
+{
+  "$ref": "#/definitions/blog",
+  "definitions": {
+    "blog": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "draft": {
+          "type": "boolean"
+        },
+        "pubDate": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "cover": {
+          "type": "string"
+        },
+        "coverAlt": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "draft",
+        "pubDate",
+        "description",
+        "cover",
+        "coverAlt",
+        "tags"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

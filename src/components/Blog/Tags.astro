@@ -1,26 +1,19 @@
 ---
-
 export interface Props {
-	tags?: Array<any>;
+    tags?: Array<any>;
 }
 
-const { tags } = Astro.props
-
+const { tags } = Astro.props;
 ---
 
-{ tags && (
-    <ul>
-        {tags.map((tag) => (
-            <li><a href={`/tag/${tag}`}>{tag}</a></li>
-        ))}
-    </ul>
-)}
-
-<style>
-    ul{
-        @apply flex gap-4
-    }
-    ul li {
-        @apply bg-orange-300 rounded-2xl text-sm px-2 py-1
-    }
-</style>
+{
+    tags && (
+        <ul class="flex gap-4">
+            {tags.map((tag) => (
+                <li class="bg-orange-300 rounded-2xl text-sm px-2 py-1">
+                    <a href={`/tag/${tag}`}>{tag}</a>
+                </li>
+            ))}
+        </ul>
+    )
+}

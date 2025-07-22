@@ -1,54 +1,53 @@
 ---
-import { Image } from "astro:assets";
-import Tags from "@components/Blog/Tags.astro";
-export interface Props {
-    posts: Array<any>;
-}
+import { Image } from 'astro:assets'
+import Tags from '@components/Blog/Tags.astro'
 
 const { posts } = Astro.props;
 ---
 
 <section>
     {
-        posts.length == 0 ? (
-            <p>Oh, no hay posts</p>
-        ) : (
-            <ul>
-                {posts.map((post) => (
-                    <li class="grid grid-cols-12 gap-4">
-                        <header class="col-span-12 md:col-span-3">
-                            <a href={"/blog/" + post.slug}>
-                                <Image
-                                    src={post.data.cover}
-                                    alt={post.data.coverAlt}
-                                    transition:name={'cover-'+post.slug}
-                                    class="aspect-video object-cover"
-                                />
-                            </a>
-                        </header>
-                        <div class="col-span-12 md:col-span-9">
-                            <h3>
-                                {" "}
-                                <a href={"/blog/" + post.slug}>
-                                    <span>{post.data.title}</span>
+        posts.length === 0
+            ? (
+                <p>Oh, no hay posts</p>
+            )
+            : (
+                <ul>
+                    {posts.map((post) => (
+                        <li class="grid grid-cols-12 gap-4">
+                            <header class="col-span-12 md:col-span-3">
+                                <a href={'/blog/' + post.slug}>
+                                    <Image
+                                        src={post.data.cover}
+                                        alt={post.data.coverAlt}
+                                        transition:name={'cover-' + post.slug}
+                                        class="aspect-video object-cover"
+                                    />
                                 </a>
-                            </h3>
-                            <time datetime={post.data.pubDate}>
-                                {new Date(post.data.pubDate).toLocaleDateString(
-                                    "es-ES",
-                                    {
-                                        year: "numeric",
-                                        month: "short",
-                                        day: "numeric",
-                                    },
-                                )}
-                            </time>
-                            <Tags tags={post.data.tags} />
-                            <p>{post.data.description}</p>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-        )
+                            </header>
+                            <div class="col-span-12 md:col-span-9">
+                                <h3>
+                                    {' '}
+                                    <a href={'/blog/' + post.slug}>
+                                        <span>{post.data.title}</span>
+                                    </a>
+                                </h3>
+                                <time datetime={post.data.pubDate}>
+                                    {new Date(post.data.pubDate).toLocaleDateString(
+                                        'es-ES',
+                                        {
+                                            year: 'numeric',
+                                            month: 'short',
+                                            day: 'numeric'
+                                        }
+                                    )}
+                                </time>
+                                <Tags tags={post.data.tags} />
+                                <p>{post.data.description}</p>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            )
     }
 </section>

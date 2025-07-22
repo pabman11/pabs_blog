@@ -1,0 +1,7 @@
+
+import __ASTRO_IMAGE_IMPORT_Lr7a2 from "./placeholder-hero.jpg?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fastro-sencillez-hecha-framework.mdx";
+import __ASTRO_IMAGE_IMPORT_E4xhg from "./placeholder-hero.jpg?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fbienvenidos-al-blog.mdx";
+import __ASTRO_IMAGE_IMPORT_1t4wWr from "./el-placer-del-dungeon-master.jpg?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fel-placer-del-dungeon-master.mdx";
+import __ASTRO_IMAGE_IMPORT_RW4Vq from "./journal-2850091_1280.jpg?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fla-hoja-en-blanco.mdx";
+export default new Map([["./placeholder-hero.jpg?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fastro-sencillez-hecha-framework.mdx", __ASTRO_IMAGE_IMPORT_Lr7a2], ["./placeholder-hero.jpg?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fbienvenidos-al-blog.mdx", __ASTRO_IMAGE_IMPORT_E4xhg], ["./el-placer-del-dungeon-master.jpg?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fel-placer-del-dungeon-master.mdx", __ASTRO_IMAGE_IMPORT_1t4wWr], ["./journal-2850091_1280.jpg?astroContentImageFlag=&importer=src%2Fcontent%2Fblog%2Fla-hoja-en-blanco.mdx", __ASTRO_IMAGE_IMPORT_RW4Vq]]);
+		
