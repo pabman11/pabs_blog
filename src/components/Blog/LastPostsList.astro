@@ -13,13 +13,14 @@ const { posts } = Astro.props;
             )
             : (
                 <ul>
-                    {posts.map((post) => (
+                    {posts.map((post, index) => (
                         <li class="grid grid-cols-12 gap-4">
                             <header class="col-span-12 md:col-span-3">
                                 <a href={'/blog/' + post.slug}>
                                     <Image
                                         src={post.data.cover}
                                         alt={post.data.coverAlt}
+                                        loading={index < 5 ? 'eager' : 'lazy'}
                                         transition:name={'cover-' + post.slug}
                                         class="aspect-video object-cover"
                                     />

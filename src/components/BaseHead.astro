@@ -40,3 +40,13 @@ const { title, description, image = '/placeholder-social.jpg' } = Astro.props;
     src="https://static.cloudflareinsights.com/beacon.min.js"
     data-cf-beacon='{"token": "c85495cb3b1e485291b1bd173c526e9c"}'
 ></script><!-- End Cloudflare Web Analytics -->
+    <script>
+if (
+  localStorage.theme === 'dark' ||
+        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+) {
+  document.documentElement.classList.add('dark')
+} else {
+  document.documentElement.classList.remove('dark')
+}
+</script>

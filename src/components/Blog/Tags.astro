@@ -10,7 +10,7 @@ const { tags } = Astro.props;
     tags && (
         <ul class="flex gap-4">
             {tags.map((tag) => (
-                <li class="bg-orange-300 rounded-2xl text-sm px-2 py-1">
+                <li class="bg-orange-700 rounded-2xl font-bold text-sm px-2 py-1 first-letter:uppercase">
                     <a href={`/tag/${tag}`}>{tag}</a>
                 </li>
             ))}

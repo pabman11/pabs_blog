@@ -15,16 +15,17 @@ posts.sort(
 
 <section>
     <h2 class="font-bold text-3xl text-center">Últimos posts</h2>
-    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-2">
         {
-            posts.map((post) => (
-                <li class="first-of-type:col-span-2">
+            posts.map((post, index) => (
+                <li class="md:first-of-type:col-span-2 ">
                     <article>
                         <header>
                             <a class="block" href={'/blog/' + post.slug}>
                                 <Image
                                     src={post.data.cover}
                                     alt={post.data.coverAlt}
+                                    loading={index < 3 ? 'eager' : 'lazy'}
                                     transition:name={'cover-' + post.slug}
                                     class="aspect-video object-cover"
                                 />
