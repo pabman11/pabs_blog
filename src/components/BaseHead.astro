@@ -3,7 +3,9 @@ import { ClientRouter } from 'astro:transitions'
 
 import '@assets/styles.css'
 
-const { title, description, image = '/placeholder-social.jpg' } = Astro.props;
+const { title, description, image = '/placeholder-social.jpg' } = Astro.props
+
+const cloudflareToken = import.meta.env.CLOUDFLARE_ANALYTICS_TOKEN || '';
 ---
 
 <!-- Global Metadata -->
@@ -38,7 +40,8 @@ const { title, description, image = '/placeholder-social.jpg' } = Astro.props;
 <script
     defer
     src="https://static.cloudflareinsights.com/beacon.min.js"
-    data-cf-beacon='{"token": "c85495cb3b1e485291b1bd173c526e9c"}'
+    data-cf-beacon='{"token": "{cloudflareToken}"}'
+    crossorigin="anonymous"
 ></script><!-- End Cloudflare Web Analytics -->
     <script>
 if (

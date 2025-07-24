@@ -72,13 +72,6 @@ import DarkMode from './DarkMode.astro';
                     </HeaderLink>
                     <HeaderLink
                         class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                        href="https://twitter.com/Pabman_11"
-                        target="_blank"
-                    >
-                        Twitter
-                    </HeaderLink>
-                    <HeaderLink
-                        class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                         href="https://github.com/pabman11"
                         target="_blank"
                     >
@@ -92,19 +85,10 @@ import DarkMode from './DarkMode.astro';
 <script is:inline>
 const toggle = document.querySelector(
   'button[data-collapse-toggle=navbar-hamburger]'
-)
+);
+const navbar = document.getElementById('navbar-hamburger');
 
-toggle.addEventListener('click', (e) => {
-  toggleNav(e.target)
-})
-
-function toggleNav (e) {
-  if (e === toggle) {
-    document
-      .getElementById('navbar-hamburger')
-      .classList.toggle('block!')
-  } else {
-    toggleNav(e.parentNode)
-  }
-}
+toggle.addEventListener('click', () => {
+  navbar.classList.toggle('hidden');
+});
 </script>

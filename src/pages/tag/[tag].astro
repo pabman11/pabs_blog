@@ -25,6 +25,6 @@ const { posts } = Astro.props;
 
 <General SITE_TITLE={tag}>
     <style slot="style"></style>
-    <h2>{tag}</h2>
+    <h2 class="text-3xl font-bold first-letter:uppercase text-center p-4">{tag}</h2>
     <LastPostsList posts={posts} />
 </General>
