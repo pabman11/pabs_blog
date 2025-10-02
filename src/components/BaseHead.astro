@@ -35,6 +35,9 @@ const cloudflareToken = import.meta.env.CLOUDFLARE_ANALYTICS_TOKEN || '';
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
+<!-- Umami -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="101e64a1-ecb5-402f-9c47-75720d521687"></script>
+
 <ClientRouter />
 <!-- Cloudflare Web Analytics -->
 <script
